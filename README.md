@@ -16,6 +16,8 @@ How training works:
 https://docs.opencv.org/3.4/dc/d88/tutorial_traincascade.html
 Blog post tutorial:
 https://coding-robin.de/2013/07/22/train-your-own-opencv-haar-classifier.html
+Another tutorial (check it out):
+http://christopher5106.github.io/computer/vision/2015/10/19/create-an-object-detector.html
 
 ===================================================================================================
 How to do the cascade training:
