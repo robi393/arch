@@ -137,3 +137,7 @@ Turning frame number into time data
 GNSS bevezető - ESA könyve
 https://gssc.esa.int/navipedia/GNSS_Book/ESA_GNSS-Book_TM-23_Vol_I.pdf
 --------
+
+Kedves Zita!
+
+A szakmai gyakorlat igazolásával kapcsolatban szeretnék érdeklődni. A mellékletben csatoltam egy igazolólapot, melyet az iskolám csak cégszerű aláírással fogad el. Mentorommal (Nagy Dániel) már aláírattam egy példányt, viszont azt mondta, hogy ő nem tudja Bosch-os pecséttel ellátni. 
