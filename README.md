@@ -49,3 +49,86 @@ img/img2.jpg
 https://pdfs.semanticscholar.org/d909/6dc6d76148633f168c929e6e7961f563ca78.pdf
 
 Moreover, due to the numerous image scans for each patient and similar intensity of the nearby organs, manual segmentation is a tedious task and is prone to errors. Therefore, reliable automated algorithms should be utilized to delineate the region of interest.
+
+------------------------------
+1.) Vision For Test Drives (->)
+Phase I. (2 HC on board)
+Bosch as driver
+Bosch as engineer
+//measurement requires a lot of adjustments, plus tagging needs to be done
+Phase II. (2 HC on board)
+AMS driver
+Bosch as engineer
+//measurement requires a lot of adjustments, plus tagging needs to be done)
+Phase III. (2 HC on board)
+AMS as driver
+BEKO/AMS as engineer
+//measurements are becoming more stable, some intervention is required, plus tagging needs to be done)
+Phase IV. (1 HC on board)
+AMS as driver
+No engineer
+//measurements are stable, driver can start the equipment and then do ~100km of driving. Tagging is done offline by AI.
+
+2)
+Computer Vision (CV) has been rapidly evolved in the last decade. Today very sophisticated APIs are publicly accessible for image recognition, which help the engineer to do these tasks quickly and efficiently. 
+For test drives evaulation, knowing the environment is beneficial, that’s why an engineer does tagging during the drives. This activity can be replaced by AI, with adequate accuracy.
+As many drive data could be available in the measurements, the auto-tagging function can go pure image recognition. (e.g.: tagging based on road turn radius, rain-sensor signal, environment temperature etc.)
+
+3) Pyramid
+AI
+Neural NetWorks
+CNN - widespread deep-learning technology for image recognition
+faster r-cnn
+(+: shows better accuracy compared to other solutions, detects smaller features well; -: slow)
+
+4) Object Recognition - Implementations
+Matlab (Computer vision toolbox)
++ Easy to use, many tutorials are available for object det.
++ Commonly used within Bosch
+- Limited options compared to Python
+- Relatively slow
+Python
++ Faster computiong
++ Commonly used
++ Good object det API
++ Better parallelization
+- Portability and coding is more challanging
+Google APi
++ ready to use service
+- slow, expensive, confidentality issues
+
+5) Object rec. software overview
+Input video files from measurement camera -> main scrip -> frame extractor (provides frame of the video for the image recognition) -> TensorFlow API: object det api provides per frame results -> main scrip -> result file contains frame number and detected objects
+
+6) Configuring the AI
+Config file is needed for:
+number of objects to be detected (tunnel, gantry, …)
+max objects per frame
+thresholds
+training config options
+and more
+
+7) Training the AI
+Training is done throurg the convenient  „LabelImg”
+100 frames gives adaquate image recognition performance
+Training a new object takes approx 1 hour 
+On one frame more objects can belabelled at the same time
+
+8) Resulkts so far
+The system is capable of recognizing the following objects on a highway with high accuracy:
+Truck
+Gantry
+Bridge
+Tagging a 1.5 hour-long video takes about 2 hours
+If we use more training data we can improve the accuracy and robustness of the modell
+
+9) Example pictures
+
+10) Example file
+
+11) Further improvements
+Make Auto-Tagging an integral part of the eval tool or the post-processing 
+Tagging can be extended into situation recognition by applying vehicle date from the vehicle-bus
+Training the modell to detect objects that are very similar to our currently detected objects (to avoid false detections)
+Applying plausabilization to output file for avoiding false positives
+Turning frame number into time data
