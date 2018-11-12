@@ -132,3 +132,8 @@ Tagging can be extended into situation recognition by applying vehicle date from
 Training the modell to detect objects that are very similar to our currently detected objects (to avoid false detections)
 Applying plausabilization to output file for avoiding false positives
 Turning frame number into time data
+
+--------
+GNSS bevezető - ESA könyve
+https://gssc.esa.int/navipedia/GNSS_Book/ESA_GNSS-Book_TM-23_Vol_I.pdf
+--------
