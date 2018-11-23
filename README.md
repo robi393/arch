@@ -315,3 +315,9 @@ Conclusion
 
 This paper explains a number of current image processing methods which are widely used in medical image segmentation. The appropriate segmentation algorithm should be chosen based on the application of the segmentation. When regions of interest can be distinguished from the background by their intensity, threshold-based or region growing techniques have been employed. On the other hand, when objects can be identified by their shapes, model-based techniques are applied for the segmentation. As recently reported in the literature, several general conclusions can be drawn. First, for the sake of reproducibility, it is important to direct segmentation towards a fully automated method by using human intelligence and prior knowledge about the structure of interest along with the algorithm to improve the segmentation results. Second, the use of some pre- or postprocessing methods has demonstrated improved segmentation results. Third, since to the best of our knowledge there is not a standardized database available for many medical applications, the comparison between different algorithms is difficult. Even if such a unified database exists for some medical challenges (like BRATS database for brain tumor segmentation [44]) only a few of the current algorithms were applied to such databases. Finally, although current segmentation algorithms show promising results, the automatic segmentation methods still need more robust procedures to gain wide acceptance among the clinicians for every day clinic practice.
 
+-----------
+Evaluation metrics
+For detection use this:
+https://pdfs.semanticscholar.org/d051/ba0a904e4b4c45a2af145aa29b8490bbbc5c.pdf
+For recognition this might be a good idea to start with:
+http://thesai.org/Downloads/Volume7No1/Paper_93-Traffic_Sign_Detection_and_Recognition.pdf
