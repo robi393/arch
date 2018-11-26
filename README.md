@@ -336,6 +336,8 @@ Az algoritmus elvégzi ezt a műveletet az összes tanuló adaton az összes leh
 
 A teljes detektálás egy kaszkádosított rendszer, amelynek az egyes fokozatai az AdaBoost által tanított erős osztályozók. A későbbi fázisokat csak abban az esetben tanítja be a rendszer, ha a korábbi fázisok mindegyikének megfelelt, ezáltal a későbbi fázisok egyre szigorúbbak. Egy objektumot abban az esetben detektál a rendszer, ha az objektumot tartalmazó részkép minden egyes fázison sikeresen áthaladt. Ha az algoritmus már az első fázisban elveti a részképet, akkor csak az első fázis jellemzőit számolja ki, így csak ritkán fordul első, hogy minden fokozat minden jellemzőjét ki kell számolni. Tanulás során minden fázist csak addig tanít a renszer, amíg a meghatározott teljesítményt el nem éri, ezzel csökkentve a számítási időt.
 
+Detektálás során egy adott részképre vonatkozóan az egyes fázisok eredménye lehet pozitív vagy negatív. Valódi pozitív az eredmény, ha az osztályozó helyesen, míg álpozitív az eredmény, ha tévesen detektált egy objektumot. Álnegatív eredmény abban az esetben következhet be, ha az osztályozó nem képes detektálni egy objektumot, annak ellenére, hogy az szerepel az adott részképen. Ahhoz, hogy a rendszer helyesen működjün, az egyes fázisoknak kevés álnegatív eredményt kell produkálnia, hiszen negatív eredmény esetén az algoritmus megáll, és a későbbi fázisokban már nincs lehetőség ezt korrigálni, míg sok álpozitív eredmény megengedett.
+
 Az OpenCV rendelkezik olyan alkalmazásokkal, amelyek segítségével el lehet végezni a rendszer betanítását, valamit szolgáltat beépített függvényeket a betanított rendszer használatához. 
 
 Haar-openCV
