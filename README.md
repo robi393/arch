@@ -340,8 +340,88 @@ Detektálás során egy adott részképre vonatkozóan az egyes fázisok eredmé
 
 Az OpenCV rendelkezik olyan alkalmazásokkal, amelyek segítségével el lehet végezni a rendszer betanítását, valamit szolgáltat beépített függvényeket a betanított rendszer használatához. 
 
-Haar-openCV
 
+HASONLÓ RENDSZEREK
+
+http://thesai.org/Downloads/Volume7No1/Paper_93-Traffic_Sign_Detection_and_Recognition.pdf
+Abstract
+—In  this  paper,  we  present  a  computer  vision  based
+system  for  fast  robust  Traffic  Sign  Detection  and  Recognition
+(TSDR), consisting of three steps. The first step consists on image
+enhancement and thresholding using the three components of the
+Hue Saturation and Value (HSV) space. Then we refer to distance
+to border feature and Random Forests classifier to detect circular,
+triangular  and  rectangular  shapes  on  the  segmented  images.
+The last step consists on identifying the information included in
+the  detected  traffic  signs.  We  compare  four  features  descriptors
+which  include  Histogram  of  Oriented  Gradients  (HOG),  Gabor,
+Local Binary Pattern (LBP), and Local Self-Similarity (LSS). We
+also compare their different combinations. For the classifiers we
+have  carried  out  a  comparison  between  Random  Forests  and
+Support Vector Machines (SVMs). The best results are given by
+the combination HOG with LSS together with the Random Forest
+classifier.  The  proposed  method  has  been  tested  on  the  Swedish
+Traffic  Signs Data  set and  gives  satisfactory results.
+
+https://www.irjet.net/archives/V4/i4/IRJET-V4I4275.pdf
+This  paper  reviews  the  method  for  traffic  sign 
+detection  and  recognition.  In  the  section  on  learning
+based detection,   we   review   the   Viola   Jones   detector   and   the 
+possibility   of   applying   it   to   traffic   sign   detection.   The 
+recognition  of  the  detected  traffic  sign  is  handled  by  the 
+Histogram  of  Gradient  based  SVM  classifier.  Together  this 
+system  is  expected  to  perform  much  better  than  the  other 
+systems available. The algorithms when trained with proper 
+set  of  images  have  been  noted  to  perform  accurately.  This 
+must  hold  true  for  the  traffic  signs  as  well  under  different 
+color, lighting, atmospheric conditions.
+
+https://www.irjet.net/archives/V4/i4/IRJET-V4I4275.pdf
+The system uses the Viola-Jones algorithm to detect signs, 
+which  is  a  very  fast  and  accurate  algorithm  if  trained 
+properly. This enables the detection on embedded devices 
+possible where low computing power is available. Also the 
+system uses the HOG algorithm to extract features to train 
+the SVM cascade, which is again very accurate. The features 
+extracted  are  then  fed  to  SVM  cascade  instead  of  other 
+algorithms like ANN, KNN which are not as accurate as the 
+SVM algorithm. Moreover, SVM does not have a K value like 
+KNN, which slows it as the value increases.
+
+https://lmb.informatik.uni-freiburg.de/people/bahlmann/data/ba_zh_ra_pe_ko_iv2005
+ This paper describes a computer vision based sys-
+tem for real-time robust traffic sign detection, tracking, and
+recognition. Such a framework is of major interest for driver
+assistance in an intelligent automotive cockpit environment. The
+proposed approach consists of two components. First, signs are
+detected using a set of Haar wavelet features obtained from Ada-
+Boost training. Compared to previously published approaches,
+our solution offers a generic, joint modeling of color and
+shape information without the need of tuning free parameters.
+Once detected, objects are efficiently tracked within a temporal
+information propagation framework. Second, classification is
+performed using Bayesian generative modeling. Making use of the
+tracking information, hypotheses are fused over multiple frames.
+Experiments show high detection and recognition accuracy and a
+frame rate of approximately 10 frames per second on a standard
+PC
+
+http://www.cs.sjtu.edu.cn/~shengbin/course/SE/Real-Time%20Detection%20and%20Recognition%20of%20road%20traffic%20signs.pdf
+This  paper  proposes  a  novel  system  for  the  auto-
+matic  detection  and  recognition  of  traffic  signs.  The  proposed
+system  detects  candidate  regions  as  maximally  stable  extremal
+regions (MSERs), which offers robustness to variations in lighting
+conditions.  Recognition  is  based  on  a  cascade  of  support  vector
+machine  (SVM)  classifiers  that  were  trained  using  histogram  of
+oriented gradient (HOG) features. The training data are generated
+from synthetic template images that are freely available from an
+online  database;  thus,  real  footage  road  signs  are  not  required
+as training data. The proposed system is accurate at high vehicle
+speeds, operates under a range of weather conditions, runs at an
+average speed of 20 frames per second, and recognizes all classes
+of ideogram-based (nontext) traffic symbols from an online road
+sign database. Comprehensive comparative results to illustrate the
+performance of the system are presented.
 
 
 MEGVALÓSÍTÁS
