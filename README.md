@@ -329,3 +329,13 @@ http://thesai.org/Downloads/Volume7No1/Paper_93-Traffic_Sign_Detection_and_Recog
 -----------------------
 https://projekter.aau.dk/projekter/files/63218113/report.pdf
 https://pdfs.semanticscholar.org/0f1e/866c3acb8a10f96b432e86f8a61be5eb6799.pdf
+
+
+AdaBoost
+Az algoritmus elvégzi ezt a műveletet az összes tanuló adaton az összes lehetséges jellemzőre. A végső "erős osztályozó" azoknak az osztályozóknak a kombinációja lesz, amelyek a legjobb eredményt szolgáltatják. A tanulás során minden tanuló adathoz hozzárendel egy súlyt, a nehezen osztályozható képeknél ezt a súlyt megnöveli így ezek nagyobb valószínűséggel kerül a végső erős osztályozóba. Csak annyi jellemzőt vesz figyelembe az erős osztályozó, amennyi elegendő a kívánt eredmény eléréséhez. Azon gyenge osztályozókat, amelyek az esetek legalább 50%-ban helyesen detektálnak, hozzá lehet venni az erős osztályozóhoz.
+
+A teljes detektálás egy kaszkádosított rendszer, amelynek az egyes fokozatai az AdaBoost által tanított erős osztályozók. A későbbi fázisokat csak abban az esetben tanítja be a rendszer, ha a korábbi fázisok mindegyikének megfelelt, ezáltal a későbbi fázisok egyre szigorúbbak. Egy objektumot abban az esetben detektál a rendszer, ha az objektumot tartalmazó részkép minden egyes fázison sikeresen áthaladt. Ha az algoritmus már az első fázisban elveti a részképet, akkor csak az első fázis jellemzőit számolja ki, így csak ritkán fordul első, hogy minden fokozat minden jellemzőjét ki kell számolni. Tanulás során minden fázist csak addig tanít a renszer, amíg a meghatározott teljesítményt el nem éri, ezzel csökkentve a számítási időt.
+
+Az OpenCV rendelkezik olyan alkalmazásokkal, amelyek segítségével el lehet végezni a rendszer betanítását, valamit szolgáltat beépített függvényeket a betanított rendszer használatához. 
+
+Haar-openCV
