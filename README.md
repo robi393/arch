@@ -341,3 +341,52 @@ Detektálás során egy adott részképre vonatkozóan az egyes fázisok eredmé
 Az OpenCV rendelkezik olyan alkalmazásokkal, amelyek segítségével el lehet végezni a rendszer betanítását, valamit szolgáltat beépített függvényeket a betanított rendszer használatához. 
 
 Haar-openCV
+
+
+
+MEGVALÓSÍTÁS
+[I - Videófájlok kezelése OpenCV-ben]
+Képkockák kinyerése
+
+[II:Haar kaszkád osztályozók betanítása]
+Az OpenCV több alkalmazással rendelkezik, amelyek segítségével elvégezhető a betanítás: opencv_createsamples, opencv_annotation, opencv_traincascade, opencv_visualisation. Ezek használata a későbbiekben részletesebben is bemutatásra kerül.
+[2:Adatok előkészítése]
+A gyenge osztályozók tanításához szükség van egy pozitív és egy negatív mintákból álló halmazra, melyeket a már korábban elkészített felvételekből állítottam össze.
+[2.1: Negatív minták]
+A negatív minták olyan véletlenszerűen választott képkockák, melyek nem tartalmaznak olyan objektumot, amit detektálni szeretnénk. Ezen képek útvonalait össze kell gyűjteni egy szöveges állományban, ahol minden sor egy kép elérési útvonalát tartalmazza. A negatív képek méretére vonatkozóan csak egyetlen megkötés van: nagyobbnak kell lenniük, mint a tanuló ablakméret, ami a model tanításának egyik fontos paramétere. Az ablakméret határozza meg azt is, hogy a negatív képekből hány almintát generál majd az algoritmus. 
+[2.1: Pozitív minták]
+A pozitív képek tartalmazzák a detektálandó objektumokatat, ezeket pedig az "opencv_createsamples" alkalmazás segítségével készítjük elő. Az alkalmazás két lehetőséget kínál a pozitív mintákat tartalmazó adathalmaz előállítására:
+- A rendelkezésre álló pozitív mintákon néhány egyszerűbb transzformációt végrehajtva további mintákat képes generálni. Ez a megoldási mód megfelelően működhet olyan objektumok esetében, amelyeket mindig ugyanolyan fényviszonyok mellett, ugyanolyan szögből szeretnénk detektálni, viszont ezen feltételek nélkül gyenge eredményeket szolgáltat.
+- A képeken kivágja és átméretezi a detektálandó objektumokat és átkonvertálja az OpenCV által kezelhető bináris formátumra. Ezt a megoldást választottam, mert volt elegendő mennyiségű tanuló adatom, ezért a továbbiakban csak ezt a módszert ismertetem.
+A pozitív képekből is elő kell állítani egy listát egy szöveges fájlban a negatív képekhez hasonlóan. A különbség az, hogy itt jelölni kell az objektumok pozícióját is a képen az alábbi módon:
+
+Könyvtárstrukt.
+/img
+  img1.jpg
+  img2.jpg
+info.dat
+
+img/img1.jpg  1  140 100 45 45
+img/img2.jpg  2  100 200 50 50   50 30 25 25
+
+Az útvonalt követő szám a képen található objektumok számát jelöli, melyet az objektumok koordinátái (x, y, szélesség, magasság) követnek. Ha ezek elkészültek, az alkalmazás parancssorból futtatható.
+
+[2.3. Az OpenCV integrált annotációs eszköze]
+Az OpenCV rendelkezik egy annotációs eszközzel (opencv_annotation), amely segítségével a pozitív mintákat tároló szöveges fájl könnyen előállítható. Az alkalmazást parancssorból indítva két paramétert vár el, a kimeneti fájl útvonalát és a pozitív képeket tartalmazó mappa útvonalát. Ezt követően grafikus felületen, kézzel jelölhetjük ki az objektumokat, és ezek alapján az alkalmazás automatikusan legenerálja a szükséges szöveges fájlt. 
+
+[3] Kaszkád tanítása
+Ha a szükséges adathalmazokat előkészítettük, az opencv_traincascade alkalmazás segítségével tanítjuk be az osztályozókat. Főbb paramétereit az alábbiak szerint állítottam be:
+??????????
+Miután a tanítás befejeződött, a megadott mappában létrejön egy cascade.xml fájl, ami már használható detektálásra.
+
+[4] OpenCV detektálás folyamata
+Ahhoz, hogy a betanított detektort használni tudjuk a programban, be kell tölteni az előző lépésben létrehozott xml kiterjesztésű fájlt. A tényleges detektálást az alábbi függvény valósítja meg:
+
+[III - support vektor machines]
+- az alábbi táblák felismerésére vagyunk képesek::
+- az adatok elkészítése - miért akkora, stb.
+- hog jellemzők kiszámítása
+- svm megvalósítása
+	- betanítás folyamata
+	- ezen belül a folyamatos konverzió vektorok és mátrixok között
+	- klasszifikáció
