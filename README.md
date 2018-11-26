@@ -321,3 +321,11 @@ For detection use this:
 https://pdfs.semanticscholar.org/d051/ba0a904e4b4c45a2af145aa29b8490bbbc5c.pdf
 For recognition this might be a good idea to start with:
 http://thesai.org/Downloads/Volume7No1/Paper_93-Traffic_Sign_Detection_and_Recognition.pdf
+
+
+
+
+
+-----------------------
+https://projekter.aau.dk/projekter/files/63218113/report.pdf
+https://pdfs.semanticscholar.org/0f1e/866c3acb8a10f96b432e86f8a61be5eb6799.pdf
