@@ -470,3 +470,20 @@ Ahhoz, hogy a betanított detektort használni tudjuk a programban, be kell töl
 	- betanítás folyamata
 	- ezen belül a folyamatos konverzió vektorok és mátrixok között
 	- klasszifikáció
+
+
+
+
+------
+SPEC RENDSZTERV
+
+Specifikáció
+Egy olyan program megvalósítás a cél, amely automatikusan képes detektálni és felismerni járművek forgalmára vonatkozó tilalmi jelzőtáblákat gépkocsiba felszerelt videófelvételeken. A program inputja az előre elkészített videók. Ha tilalmi jelzőtábla szerepel a felvételen, arról adjon vizuális jelzést a felhasználónak és írja ki a tábla pontos nevét. Ha a felvételen több jelzőtábla szerepel egyszerre, akkor értelemszerűen az összesről kell információt szolgáltatni a felhasználónak. A táblafelismerő rendszer abban az esetben működik helyesen, ha a felvételen a tábla megjelenésétől az eltűnéséig legalább egyszer sikerült helyesen detektálni és felismerni a táblát, miközben téves detektálás és felismerés nem történt. A videófelvételek feldolgozása a felhasználó kérésére megszakítható.
+
+Rendszerterv
+	A program implementálása során felhasználom az OpenCV könyvtárait, az OpenCV elsődleges interfésze a C++, ezért ezt a nyelvet választottam, a fejlesztői környezet pedig Visual Studio 2015. A feladat megoldása az alábbi négy fő fázisból tevődik össze: adatgyűjtés, videófelvételek feldolgozása, objektumdetektálás, és objektumfelismerés.
+	Adatgyűjtés során a videófelvételek elkészítéséhez egy XXXX autós kamerát használtam, mely a 4. fejezetben részletesebben is bemutatásra kerül. Az adatgyűjtés fő célja, hogy a felvételeken található tilalmi jelzőtáblákból felépítsünk egy adatbázist, amelyet a későbbi fázisokban tanuló adatként használunk fel. További - még nem használt - felvételek szükségesek a program teszteléséhez is.
+	A videófelvételek betöltése és kezelhető formátummá történő konvertálása az OpenCV beépített függvényeivel végezzük. Ebben a fázisban történik a képkeretek kinyerése a felvételből, melyeket átméretezzük és méretre vágjuk a gyorsabb feldolgozás érdekében.
+	Detektáláshoz használható a Hough-kör transzformáció és a kontúrdetektálás kombinált változata. Ezeknek a tanítást nem igénylő egyszerű képfeldolgozási műveleteknek az alkalmazása azonban rendkívül sok tévesen detektált régiót generál a legtöbb felvételen, valamint a tábláknak közel azonos szögből, hasonló megvilágításban kell látszódnia, ezért csak igen korlátozott körülmények között működnek helyesen. További lehetőség lehet egy ablak végigfuttatása a képen, ahol egy HOG jellemzőkkel betanított, két osztályból álló SVM határozza meg, hogy az adott képrészlet tábla vagy sem. Ha az SVM-eket detektálásra használjuk a tanításra használt adathalmaz sok esetben aszimterikus, mert negatív mintából jóval többet kell tartalmaznia. Ahhoz, hogy a rendszer invariáns legyen a skálázásra minden képkeretből egy képpiramist kell építeni, majd ezek minden szintjére ki kell számolni a HOG jellemzőket, ami meglehetősen költséges művelet, és valós idejű alkalmazások esetén nehezen használható. Végül a Haar-szerű jellemzők alkalmazása mellett döntöttem, mert a kaszkád szerkezet lehetővé teszi a gyors és pontos objektum detektációt. Ahhoz, hogy ezzel dolgozni tudjunk, először be kell tanítani a rendszert a már korábban felvett adatokkal. Az OpenCV rendelkezik alkalmazásokkal, amelyekkel elvégezhető az adatok előkészítése és a betanítás, valamint létezik implentáció, amely a betanított rendszerrel elvégzi a detektálást.
+	A táblák felismerésére egy SVM osztályozót használok, amelyet szintén HOG jellemzőkkel tanítok be. Elérhetőek más jellemzők is, mint a SIFT vagy a SURF, de ezek a jellemzők túl hosszú vektorokat állítanak elő és csak szigorú feltételek mellett működnek megfelelően. Mind a tanítás, mind pedig a betanított rendszer használata beépített OpenCV osztályok és függvények segítségével történik. A tanuló adatokat külön mappastruktúrába kell rendezni, minden képfáljt betöltünk és kiszámítjuk rájuk a HOG vektorokat, az SVM-et pedig ezekkel az adatokkal tanítjuk be. A már korábban detektált régiókat adjuk át az osztályozónak.
+
