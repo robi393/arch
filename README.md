@@ -323,6 +323,23 @@ For recognition this might be a good idea to start with:
 http://thesai.org/Downloads/Volume7No1/Paper_93-Traffic_Sign_Detection_and_Recognition.pdf
 
 
+Falso Positive Rate (FPR)
+Álpozitív ráta:
+Az álpozitív eredmények számának és az álpozitív és valódi negatívok összegények az aránya. Azt méri, hogy a rendszer mennyire jól utasítja el az álpozitívokat.
+
+Detektion Rate (DR)
+Detektálási arány:
+Valódi pozitív osztva a valódi pozitív és álnegatívok összegével.  A ténylegesen detektálandó objektumokat milyen arányban képes detektálni.
+
+Accuracy
+TP + TN / CGT
+
+
+Precision
+Pontosság = a valódi pozitívok osztva a valódi pozitívok és fals pozitívok összegével. A pontosság a detektált objektumok közül a helyesen detekált objektumok aránya.
+
+Recall
+Azok közül az objektumok közül, amiket detektálni kellett volna, mennyit tudott detektálni a rendszer. (TP/(TP+FN))
 
 
 
