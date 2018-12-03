@@ -534,3 +534,11 @@ KF - Adaboost Training
 	- kaszkádba szervezés oka: kevésbé pontos, de gyors osztályozó elemet használjunk először a negatív válaasz azonosítására
 	
 	
+	640x320
+teljes vektorhossz	 13851        képszélesség/hogszize - 1 szorozva képmagasság/hosize - 1
+sor hossza		1539		képszélesség / hogwinsize - 1 * 81(hogsize)
+
+x = i % sorhossz / winSlide
+y = i / sorhossz * winSlide
+
+
