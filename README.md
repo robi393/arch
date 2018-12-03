@@ -503,4 +503,16 @@ Rendszerterv
 	A videófelvételek betöltése és kezelhető formátummá történő konvertálása az OpenCV beépített függvényeivel végezzük. Ebben a fázisban történik a képkeretek kinyerése a felvételből, melyeket átméretezzük és méretre vágjuk a gyorsabb feldolgozás érdekében.
 	Detektáláshoz használható a Hough-kör transzformáció és a kontúrdetektálás kombinált változata. Ezeknek a tanítást nem igénylő egyszerű képfeldolgozási műveleteknek az alkalmazása azonban rendkívül sok tévesen detektált régiót generál a legtöbb felvételen, valamint a tábláknak közel azonos szögből, hasonló megvilágításban kell látszódnia, ezért csak igen korlátozott körülmények között működnek helyesen. További lehetőség lehet egy ablak végigfuttatása a képen, ahol egy HOG jellemzőkkel betanított, két osztályból álló SVM határozza meg, hogy az adott képrészlet tábla vagy sem. Ha az SVM-eket detektálásra használjuk a tanításra használt adathalmaz sok esetben aszimterikus, mert negatív mintából jóval többet kell tartalmaznia. Ahhoz, hogy a rendszer invariáns legyen a skálázásra minden képkeretből egy képpiramist kell építeni, majd ezek minden szintjére ki kell számolni a HOG jellemzőket, ami meglehetősen költséges művelet, és valós idejű alkalmazások esetén nehezen használható. Végül a Haar-szerű jellemzők alkalmazása mellett döntöttem, mert a kaszkád szerkezet lehetővé teszi a gyors és pontos objektum detektációt. Ahhoz, hogy ezzel dolgozni tudjunk, először be kell tanítani a rendszert a már korábban felvett adatokkal. Az OpenCV rendelkezik alkalmazásokkal, amelyekkel elvégezhető az adatok előkészítése és a betanítás, valamint létezik implentáció, amely a betanított rendszerrel elvégzi a detektálást.
 	A táblák felismerésére egy SVM osztályozót használok, amelyet szintén HOG jellemzőkkel tanítok be. Elérhetőek más jellemzők is, mint a SIFT vagy a SURF, de ezek a jellemzők túl hosszú vektorokat állítanak elő és csak szigorú feltételek mellett működnek megfelelően. Mind a tanítás, mind pedig a betanított rendszer használata beépített OpenCV osztályok és függvények segítségével történik. A tanuló adatokat külön mappastruktúrába kell rendezni, minden képfáljt betöltünk és kiszámítjuk rájuk a HOG vektorokat, az SVM-et pedig ezekkel az adatokkal tanítjuk be. A már korábban detektált régiókat adjuk át az osztályozónak.
+	
+	
+	
+-----
+További ötletek fotók beszúrására:
+- helyes detektálás
+- téves detektálás
+- missed detektálás
+- helyes felismerés
+- téves felismerés
+- missed felismerés
+
 
