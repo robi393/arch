@@ -516,3 +516,21 @@ További ötletek fotók beszúrására:
 - missed felismerés
 
 
+----
+KF - Adaboost Training
+> Egyszerű Haar szerű jellemzők (fekete terület - fehér tehér terület) -> gyors számítás
+> Integrál kép: ii(x,y)=szumma(i(x', y')
+	- s(x,y) = s(x,y-1) + i(x,y) (oszlopösszes)
+	- ii(x,y) = ii(x-1,y) + s(x,y)
+> ADABoost training
+	- tréning fázis: pozitív és negatív minták
+	- a legkisebb hiba mellett, a hozzá tartozó szakértőt választjuk
+	- súlyozás: szakértők helyett hatékonyabb a súlyozás, minden tréning mintához súlyokat rendel (minél nehezebb korrektül 			osztályozni annál nagyobb)
+	- ha nem megfelelően lett egy minta osztályozva, akkor a súlyát növeljük meg minden szakértő hibájával arányosan
+		ha valamely minta sok lépés után sem került osztályozásra, akkor a súlya nagyon megnő
+	- boosting: 1) kezdetben minden tréning minta azonosan van súlyozva; 2) minden boosting futam során keressók meg azt a gyenge osztályozót amely a legkisebb súlyozott tréning hibát szolgáltatja, az aktuális gynege osztályozó által tévesen osztályozott minták súlyát növeljük; 3) a végső osztályozó a gyenge osztályozók lineáris kombinációja 4) a gyenge osztályozók átsúlyozása és kombinálása az adott AdaBoost módszertől függ
+	
+	Viola-Jones Face Detector
+	- kaszkádba szervezés oka: kevésbé pontos, de gyors osztályozó elemet használjunk először a negatív válaasz azonosítására
+	
+	
