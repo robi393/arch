@@ -552,5 +552,7 @@ sor hossza		1539		képszélesség / hogwinsize - 1 * 81(hogsize)
 
 x = i % sorhossz / winSlide
 y = i / sorhossz * winSlide
+------
 
-
+instead of using existing feature vectors we could mayhaps use convolutional neural network to determine the feature vectors and train the svm with that.
+https://www.mathworks.com/help/vision/examples/image-category-classification-using-deep-learning.html
