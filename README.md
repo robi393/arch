@@ -602,3 +602,37 @@ Zen+ mag: 12LP (low power) technológia:
 - a frissített Ryzen DT vonalat ugyanakkora lapkaméreten valósította meg ugyanannyi tranzisztorral mint az eredeti design -> ennek következményeképpen a fekete szilikon terület nőtt -> a vastagabb szilikon javítja a lapka termikus viselkedését ***
 - körülbelül 11%-kal kevesebb energiát fogyaszt a Ryzen2000 mint a Ryzen 1000 ugyanazon az órafrekvencián -> ugyanazzal az energiafogy.sal pedig 15%-kkal jobb telj.
 
+----
+SzA54. A Skylake család I.
+
+(főbb jellemzői, a mikroarchitektúra továbbfejlesztése, a mikroarchitektúra
+szélességének növelése, az Intel grafikai családjai, a fejlődés áttekintése)
+
+SzA55. A Skylake család II.
+
+(bevezetett innovációk: az ISP, Memory Side Cache, a Speed Shift technológia
+mint az Enhanced SpeedStep technológia továbbfejlesztése)
+
+SzA56. A Kaby Lake család
+
+(bevezetett innovációk: a Speed Shift technológia 2. generációja, az Optane
+memória és az M.2 interfész szabvány)
+SzA57. A Kaby Lake G-sorozatú processzorok
+
+(felépítésük, MCM megvalósítás, HBM2 memória, az EMIB technika)
+
+SzA58. A Coffe Lake S-sorozat 2. generációjának innovációi
+
+(USB Gen. 2 támogatás, integrált kapcsolat (integrated connectivity),
+továbbfejlesztett Optane támogatás)
+
+VII. AMD Zen-alapú processzor családjai
+SzA59. A Zen-alapú processzor családok áttekintése
+
+(a processzor lapka szegmentálása, ennek előnyei, hátrányai, a Zen-alapú
+processzor családok áttekintése)
+
+SzA60. A CCX mag-blokk és a Zeppelin modul áttekintése
+
+(A CCX mag-blokk összevetése ARM mag cluster-ével, a Zeppelin modul
+felépítése)
