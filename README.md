@@ -556,3 +556,49 @@ y = i / sorhossz * winSlide
 
 instead of using existing feature vectors we could mayhaps use convolutional neural network to determine the feature vectors and train the svm with that.
 https://www.mathworks.com/help/vision/examples/image-category-classification-using-deep-learning.html
+
+------
+AMD ZEN Family
+I.
+------------------
+Tervezési paradigmák a többmagos processzorok szegmentálásához
+-> Monolítikus implementáció [az összes mag ugyanazon a lapkán lesz implementálva - max. 28 mag]
+-> Több csipes modul (Multi-Chip-Module - MCM) [a magok több lapkán vannak implementálva, csatlakoztatva vannak egymsához (mindenki mindenkivel) és csomagba vannak ágyazva - 4x8 mag]
+
+Moduláris processzor design előnyei/hátrányai:
++ nagy számú magok gyártása gazdaságosabb, érdemes a nagyobb lapkákat kisebb lapkákra szegmentálni [32 magos proc gyártásának költsége 0.59-szeresére csökken.]
++ a memóriacsatornák száma és az I/O lineárisan skálázva lesz a lapkaszámmal
++ különböző piaci szegmensek számára lehet processzorokat tervezni azáltal különböző számú lapka implementálásával
+- magas a késleltetés lapkák között, ami rontja a teljesítményt
+
+Alapvető építő blokkok a Zen alapú AMD procikban: Zen mag, 4 magoc CCX (Core CompleX), 8 magos Zeppelin Module (2x CCX) - Ezek alapján a Zen alapú processzorok:
+-> Ryzen Mobile (Mobil): Egy CCX, Vega GPU
+-> Ryzen (DT): Zeppelin chip
+-> ThreadRipper (HED): (1. gen) 2 Zeppelin chips IF-fel összekapcsolva, MCM-ként implementálva; (2. gen) 4 Zeppelin chip
+-> Epyc (1S/2S server): 4 Zeppelin chip IF-fel összekapcsolva, MCM-ként implementálva
+
+IF (cache koherens összeköttetés)
+- CCX modult lapkával, MCM-ben lapkát lapkával, két socketet a 2S szerverben köt össze
+- HyperTransport összeköttetés fejlesztése: alacsony késleltetés, magas sávszélesség, alacsony energiafogy. és lehetőség van le és felskálázni
+
+ZEN magok:
+ZEN (14 nm) -> ZEN+ (12 nm) -> ZEN2 (7 nm) -> ZEN3 (7nm+)
+
+Zen mag:
+- elsődleges cél az IPC növelése volt a teljesítménynövelés helyett -> ehhez az AMD kifejlesztette a SenseMI technologia csomagot
+- előnyei a korábbi Excavator architektúrával szemben: 14 nm (vs 28 nm), 52%-os teljesítménynövelés egyszálas munkamenet során; 3.7-szeres növekedés teljesítmény/Watt terén;SMT támogatás
+(Bulldozer-nél még két integer block volt, itt már egybe van építve + külön FP)
+
+IPC növelés
+Innovációk:
+- neurális hálózattal javított elágazás becslés
+- okos prefetch
+- nagyon micro-op cache
+Fejlesztések:
+- szélesepp op kiküldés (hat FX végrehajtás, 4 FP végrehajtás - utasítás kibocsátás?)
+- a mikroarchitektúra továbbfejlesztése
+
+Zen+ mag: 12LP (low power) technológia:
+- a frissített Ryzen DT vonalat ugyanakkora lapkaméreten valósította meg ugyanannyi tranzisztorral mint az eredeti design -> ennek következményeképpen a fekete szilikon terület nőtt -> a vastagabb szilikon javítja a lapka termikus viselkedését ***
+- körülbelül 11%-kal kevesebb energiát fogyaszt a Ryzen2000 mint a Ryzen 1000 ugyanazon az órafrekvencián -> ugyanazzal az energiafogy.sal pedig 15%-kkal jobb telj.
+
