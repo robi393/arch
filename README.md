@@ -1,3 +1,248 @@
+SzA54. A Skylake család I.
+(főbb jellemzői, a mikroarchitektúra továbbfejlesztése, a mikroarchitektúra szélességének növelése, az Intel grafikai családjai, a fejlődés áttekintése)
+
+- 6. generációs processzorok
+- 10%-kal jobb teljesítmény, 30%-kal jobb grafikus teljesítmény
+
+* magok mikroarchitektúrájának a továbbfejlesztése
+- növelték a szélességeket -> 5 dekódoló egység (korábban csak 4) (egy komplex és 4 egyszerű) -> a szélesség növelésével a frontend szélessége is megnőtt: az utasítás sorban (50;2x25/thread)
+- a front end Pentium 4-ig (2000) 3 széles volt, Core 2 elején (2006) 4 széles, Skalake elején már 5 széles
+- nagyobb buffer és regiszter méret
+
+* grafikus családok (ld. korábbi tétel)
+- a SkyLake nem használja az FIVR technológiát -> ennek oka, hogy növeli a lapkahőmérsékletet
+
+====================================================================================================================
+SzA55. A Skylake család II.
+(bevezetett innovációk: az ISP, Memory Side Cache, a Speed Shift technológia mint az Enhanced SpeedStep technológia továbbfejlesztése)
+
+* Integrált ISP (Image Signal Processing)
+- Komplett kamera + képalkotás megoldás: teljes hardver és szoftver integráció; optimalizált modul/szenzor támogatás (akár 4 kamera, akár 13 MP-es szenzorok); prémium minőségű képalkotás
+- Az ISP integrálva van a hatékonyabb működés érdekében
+
+* Memory Side Cache (41. old ábra)
+- teljesen koherens cache
+- elérhető az IO eszközök és megjelenítő engine számára
+
+* energiafelhasználás szabályozására vonatkozó innovációk
+>> Speed Shift technológia
+- korábbi technológia: DVFS: ha a munkamenet a P1 teljesítmény állapotnál magasabb teljesítményt kíván, akkor a processzor átveheti az energiagazdálkodás vezetését, és aktiválja a Turbo Boost technológiát; P1...PN állapotok a garantált és a még hatékony teljesítmény szintet jelölik; a PN állapotnál alacsonyabb állapotok csak kritikus feltételek mellett lépnek életbe
+- a SpeedStep legnagyobb hátránya a lassú reagálás (kb 30 ms) -> kb ennyi idő kell, amíg az OS észreveszi, hogy a működési feltételek megváltoztak. a SST ezt az időt leredukálja 1 ms-re
+- az OR továbbadja az energiagazdálkodás vezérlését a processzornak (ezen belül a PCU-nak) -> a PCU végzi el a P-állapotok kezelését (ez a Speed Shift Tech (intel) vaghy Autonomous Control (intel) vagy Hardware Controlled Performance States (ACPI) -> ez pedig már az összes P állapotot kezelni tudja
+
+>> Duty Cycle control
+(le van írva - tételnek nem része)
+
+====================================================================================================================
+SzA56. A Kaby Lake család
+(bevezetett innovációk: a Speed Shift technológia 2. generációja, az Optane memória és az M.2 interfész szabvány) 
+
+- 7. generáció (Skylake refresh), 14 nm technológia
+
+* Speed Shift v2: a frekviencia változások gyorsabban mennek végbe -> a task befejezése gyorsabb (>2x gyorsabb); a 7. generációs processzorok 15 ms alatt elérik a max. órafrekvenciát
+
+* Optán memória
+- a PCH-hoz kötődő innováció
+- nem-felejtő memória, amit tipikusan a HDD cache-eként használják
+- tipikus mérete 16 vagy 32 GB
+- M.2 kártyára van felszerelve, ami 2 vagy 4 PCIe sávval van csatlakoztatva
+- Rapdi Storage Technology driver kell a használatához
+
+* M2 interfész szabvány
+- interfész specifikáció a belülre felszerelt kiegészítő kártyákhoz
+- az mSATA sztenderdet hivatott lecserélni, különböző modul szélességet/hosszúságot kínál
+- alkalmas kis eszközökhöz, vékony laptopokhoz és tabletekhez
+
+====================================================================================================================
+SzA57. A Kaby Lake G-sorozatú processzorok
+(felépítésük, MCM megvalósítás, HBM2 memória, az EMIB technika)
+
+- 8. generációs mobil Kaby Lake G sorozat
+- egy Kaby Lake CPU-t, egy AMD grafikus egységet és egy 4 GB HBM2 (High Bandwith Memory) VRAM-ot integrál egy MCM csomagba
+- a GPU-t egy x8 PCI 3.0 sávval köti össze a CPU-val, a GPU össze van kapcsolva a HBM2 memóriával is az EMIB-en keresztül
+
+* EMIB
+- Embedded Multi-Die Interconnect Bridge -> több heterogén lapkát kapcsol össze költséghatékonyan
+
+- Az AMD Vega GPU jelentősen nagyon teljesítményre képes, mint az Intel integrált HD Graphics 630-ja
+- további előny: "less board space"
+
+(Cinebench: corss-platform test rendszer, ami kiértékeli a számítógép teljesítőképességeit)
+
+====================================================================================================================
+SzA58. A Coffe Lake S-sorozat 2. generációjának innovációi
+(USB Gen. 2 támogatás, integrált kapcsolat (integrated connectivity), továbbfejlesztett Optane támogatás)
+
+* USB standard fejlődése:
+- USB 1.0 - átviteli ráta: 1.5 MB/s
+- USB 2.0 - átviteli ráta: 60 MB/s
+- USB 3.0 - SuperSpeed átviteli rátával 625 MB/s -> az USB 3.0 specifikáció szerint a csatlakozónak kék színűnek kell lennie
+- USB 3.1 - két alternatíva: Gen 1 és Gen 2 (utóbbi SuperSpeed+ átviteli rátával 1.25 GB/s)
+- USB 3.2 - két új SuperSpeed+ átviteli mód: 1.25 és 2.5 GB/s (USB-C csatlakozóval)
+
++ A 3.0 SuperSpeed átviteli rátája a SuperSpeed buszon alapul - ennek két új soros, pont-to-point adatvonala van (full duplex átvitelhez) és egy föld vonala (ground line) -> ehhez új csatlakozókra volt szükség
+
+* Integrált kapcsolat támogatás
+- részben integrálja a 802.11ac Wi-Fi-t, a BT és RF blokkokat a PHC-ra.
+
+>> MIMO technogia
+- A MIMO (többszörös adatátviteli csatorna) technológiát az IEEE 801.11n WiFi fejlesztésénél mutatták be, hogy növelját az adat(átviteli) rátát
+- feltételezi, hogy mindkét oldalon (adónál és vevőnél is) több antenna található, és több komm. csatornát támogat, amelyeken kerestül egyidejűleg lehet adatot továbbítani
+- a MIMO technológiában az adó feldarabolja a küldendő adatot és ezeket párhuzamosan küldi el a vevőnek az elérhető csatornákon, ahol összerakja az adatrészleteket
+- 801.11n 4, a 801.11ac pedig 8 párhuzamos adatolyamot támogat
+
+>> Integrated Connectivity
+- általában van egy Wi-Fi/BT/RF modul, ami a processzortól különböző módon van elhelyezve (pl. M.2 kártyán)
+- IntCon-nal az Intel ezeket részben a PCH-ra integrálta
+- ebben az implementációban az Intel a Wi-Fi/BT/RF drága funkcionális blokkjait (pl. logic, Multiplier-Accumulator) a PCH-ra helyezi egy Puslar nevű blokkba. A modul további részeit (Physical layer, RF) egy társ (companion) RF (CRF) modulon maradnak (Jefferson Peak-nek is nevezik)
+- A CRF modul az M.2 kártyán van implementálva és egy szabadolmaztatott buszon keresztül csatlakozik a PCH-hoz (CNVio interfészen keresztül)
+
+- 2017-es Atom vonalban már bemutatta az intel, a profit növelését szeretnék elérni vele
+
+* továbbfejlesztett Optane támogatás
+- a 2. gen gyors SSD Boot lemezt és nagy HD adat lemezt tételez fel (a HD boot drive-val szemben) ezért ebben az esetben az optán memória az adatlemez cashe-ként szolgál (és nem a HD boot drive-nak)
+- a core i9+ -> + jelölés: támogatja az optán technológiát (sötétkék logó)
+
+====================================================================================================================
+SzA59. A Zen-alapú processzor családok áttekintése
+(a processzor lapka szegmentálása, ennek előnyei, hátrányai, a Zen-alapú processzor családok áttekintése)
+
+Tervezési paradigmák a többmagos processzorok szegmentálásához
+
+-> Monolítikus implementáció [az összes mag ugyanazon a lapkán lesz implementálva - max. 28 mag]
+
+-> Több csipes modul (Multi-Chip-Module - MCM) [a magok több lapkán vannak implementálva, csatlakoztatva vannak egymsához (mindenki mindenkivel) és csomagba vannak ágyazva - 4x8 mag]
+
+
+
+Moduláris processzor design előnyei/hátrányai:
+
++ nagy számú magok gyártása gazdaságosabb, érdemes a nagyobb lapkákat kisebb lapkákra szegmentálni [32 magos proc gyártásának költsége 0.59-szeresére csökken.]
+
++ a memóriacsatornák száma és az I/O lineárisan skálázva lesz a lapkaszámmal
++ különböző piaci szegmensek számára lehet processzorokat tervezni azáltal különböző számú lapka implementálásával
+
+- magas a késleltetés lapkák között, ami rontja a teljesítményt
+
+
+
+Alapvető építő blokkok a Zen alapú AMD procikban: Zen mag, 4 magoc CCX (Core CompleX), 8 magos Zeppelin Module (2x CCX) - Ezek alapján a Zen alapú processzorok:
+
+-> Ryzen Mobile (Mobil): Egy CCX, Vega GPU
+-> Ryzen (DT): Zeppelin chip
+
+-> ThreadRipper (HED): (1. gen) 2 Zeppelin chips IF-fel összekapcsolva, MCM-ként implementálva; (2. gen) 4 Zeppelin chip
+
+-> Epyc (1S/2S server): 4 Zeppelin chip IF-fel összekapcsolva, MCM-ként implementálva
+
+
+
+IF (cache koherens összeköttetés)
+
+- CCX modult lapkával, MCM-ben lapkát lapkával, két socketet a 2S szerverben köt össze
+
+- HyperTransport összeköttetés fejlesztése: alacsony késleltetés, magas sávszélesség, alacsony energiafogy. és lehetőség van le és felskálázni
+
+
+
+ZEN magok:
+ZEN (14 nm) -> ZEN+ (12 nm) -> ZEN2 (7 nm) -> ZEN3 (7nm+)
+
+
+Zen mag:
+
+- elsődleges cél az IPC növelése volt a teljesítménynövelés helyett -> ehhez az AMD kifejlesztette a SenseMI technologia csomagot
+
+- előnyei a korábbi Excavator architektúrával szemben: 14 nm (vs 28 nm), 52%-os teljesítménynövelés egyszálas munkamenet során; 3.7-szeres növekedés teljesítmény/Watt terén; SMT támogatás
+
+(Bulldozer-nél még két integer block volt, itt már egybe van építve + külön FP)
+
+
+
+IPC növelés
+
+Innovációk:
+- neurális hálózattal javított elágazás becslés
+- okos prefetch
+- nagyon micro-op cache
+
+Fejlesztések:
+- szélesepp op kiküldés (hat FX végrehajtás, 4 FP végrehajtás - utasítás kibocsátás?)
+- a mikroarchitektúra továbbfejlesztése
+
+
+
+Zen+ mag: 12LP (low power) technológia:
+
+- a frissített Ryzen DT vonalat ugyanakkora lapkaméreten valósította meg ugyanannyi tranzisztorral mint az eredeti design -> ennek következményeképpen a fekete szilikon terület nőtt -> a vastagabb szilikon javítja a lapka termikus viselkedését ***
+- körülbelül 11%-kal kevesebb energiát fogyaszt a Ryzen2000 mint a Ryzen 1000 ugyanazon az órafrekvencián -> ugyanazzal az energiafogy.sal pedig 15%-kkal jobb telj.
+
+====================================================================================================================
+
+SzA60. A CCX mag-blokk és a Zeppelin modul áttekintése
+
+
+(A CCX mag-blokk összevetése ARM mag cluster-ével, a Zeppelin modul
+felépítése)
+
+* CCX építő blokk
+- a 4 bites CCX (CPU-Complex) egy alap epítő blokk a Zen alapú processzorokban
+- minden magnak van egy 512 kB-os privát L2 cache-e, a 4 magnak van egy 8 MB-os L3 cache ami 4 szeletre van felosztva
+- az L3 cache többnyire exklúkzív, victim cashe-ként működik az L2 cacheknek
+- 1.4 milliárd tranzisztor van implementálva a lapkán
+- az összeköttetések miatt (minden lapka 9ssze van kötve minden lapkával) mindegyik mag hozzáférhez az összes L3 cache-hez ugyanazzal az átlagos késleltetéssel
+
+összehasonlítás?
+* Zeppelin modul
+- két CCX block össze van kapcsolva Infinity Fabric által
+
+
+*********
+Ryzen desktop vonal:
+- 1. gen. Ryzen desktop vonal (vagy Summit Ridge vonal)
+- van bennük egy Zeppelin lapka (másnéven Ryzen lapka): két CCX complex  IF-fel összekapcsolva
+- AM4 socket van benne
+
+ThreadRipper: 248, 249, 253, 254, 255, 256, 260
+2. gen. ThreadRipper architektúrális felépítése:
+- alacsony magszámú modelleknek két aktív lapkájuk van (6 vagy 8 mag/lapka) -> mindkettőnek direkt hozzáférése van a memóriához és az IO-hoz
+- magas magszámű modellek 4 aktív lapkával rendelkeznek (6 vagy 8 mag/Lapka) -> két lapkának van direkt hozzáférése a memhez és az io-hoz, a másik kettőnek nincs; ezeknek magasabb számítási erőforrásra van szükségük, memória és Io erőforrásuk viszont megegyezik
+(bi-modális erőforrás felhasználás)
+	-> az ütemező elsősorban a közvetlenül csatlakozó magokhoz jelöl ki feladatokat
+	-> túlmelegedés elkerüléséhoz viszont nem fogja az közvetlenül csatlakoztatott lapkán lévő összes magot betölteni
+Precision Boost
+
+
+
+
+7=======================================
+DIES
+1.) 
+2.) 11, 13, 15, 16, 17, 21, 25
+29, 32, 33, 34, 37, 38, 39, 41
+48, 49, 50, 52, 53, 56, 59
+63, 65, 67, 68, 69, 70
+
+INTERCONNS
+8
+
+MOBILE BOOM
+1.)	2, 7, 8, 10, 16, 22, 23									(7)
+2.)	25, 26, 28, 36, 38									(5)
+3.)	40, 42, 43, 44, 48, 52, 54, 55, 56, 58, 61, 62, 63, 66, 67, 69, 70, 73, 74		(19)
+4.)	79, 81, 86, 88, 92, 94, 100, 110, 114, 115, 116, 117, 118, 119, 121, 127, 128, 131	(18)
+5.)	133, 135										(2)
+
+ARM
+1.)	5										(1)
+2.)	21, 23, 24, 31, 36, 48, 49							(7)
+3.)	146, 147, 152, 154								(4)
+4.)	158, 163, 166, 167, 168, 170, 172, 181, 186					(9)
+6.)	261, 264, 265, 266, 269, 270, 273, 275, 276, 277, 278, 283, 286, 289, 290, 305	(16)
+
+PDF Felolvasó: http://digitalisinnovacio.hu/hasznos-programok-pdf-felolvaso-program-magyarul/
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Research papers:
 https://projekter.aau.dk/projekter/files/63218113/report.pdf
 https://www.irjet.net/archives/V4/i4/IRJET-V4I4275.pdf
