@@ -970,3 +970,54 @@ Milyen transzformációkat használhatunk a munkadarabok mozgásának leírásá
 LD előző tételek
 
 Küldő koordináták
+
+
+==================================================================================================================
+A Denavit-Hartenberg passzív szemléletű modell. Milyen paraméterek írják le a robotok kinematikai mozgását? Hogyan írjuk le a szomszédos koordinátarendszerek kapcsolatát Denavit-Hartenberg konvenció szerint! Ismertesse a forgó és csúszó típusú izületek Denavit-Hartenberg modelljét! 
+
+1) Denavit-Hartenberg modell
+A manipulátorok kinematikai modellezésére alkalmazott, széles körben elter¬jedt egyik módszer a Denavit–Hartenberg-leíráson alapszik
+
+2) Kartag és izületi kinematikai paraméterek
+Tételezzünk fel egy egyszerű, nyílt kinematikai láncot n darab izülettel.
+Kartagra jellemző két paraméter:
+- kartag általánosított hossza - a (az a távolság, amely a két egymást követő izület tengelyeinek a közös normálisa - az az egyenes, amely mindkét egyenesre merőleges)
+- kartag csavarási szöge - alfa (a két kitérő tengely hajlásszöge - úgy kaphatjuk meg, ha az egyik izületi tengelyt önmagával párhuzamosan a közös normális mentés a másik izületi tengelyig toljuk)
+[3.1. ábra]
+
+Izületeket további két paraméterrel jellemezhetjük:
+- izületi távolság - b (a két közös normálisnak az adott izületi tengelyen mért távolsága)
+- izületi szög - béta (a két kapcsolódó kartag közös normálisának az egymással bezárt szöge, az izületi tengelyre merőleges síkban mérjük)
+
+-> azu, hogy melyik paraméter változik a mozgás során, az izület típusa határozza meg. ha a kartag elcsavarodhat, vagy billenhet az izületi tengely körül, akkor béta a mozgásra jellemző változó. ha a kartag a tengely mentén egyenes vonaló mozgást végez, akkor a b izületi távolság a változó paraméter
+-> a kartagparaméterek értékei konstansok
+
+- A kartag és az izületi paramétereket együttesen Denavit–Hartenberg kinemati¬kai paramétereknek nevezzük. -> Egy n számú mozgástengelyt tartalmazó mani¬pulátor esetében legalább 4n kinematikai paraméter szükséges annak biztosítá¬sára, hogy a manipulátor kinematikai konfigurációja meghatározott legyen.
+- ebből három olyan konstans érték, melyet a mechanikai tervezés határoz meg, míg a negyedik érték a mozgás típusától függő változó.
+
+3) Koordináta-rendszer-hozzárendelés a Denavit–Harten¬berg-konvenció szerint
+- a kinematikai lánc mozgásának meghatározásához mindegyik izülethez hozzárendelünk egy lokális koordinátarendszert
+
+Koordinátarendszerek meghatározásának az algoritmusa:
+1: Az i-edik Li lokális koordináta rendszer az i-edik kartag végén helyezkedik el
+2: A zi koordinátatengely mindig a mozgástengely irányába mutat
+3: Meghatározzuk a zi-vel azonosított mozgástengelyek közös normálisát, ekkor az xi lokális egységvektor: xi = zi-1 x zi
+4: Az Li koordinátarendszer origója a mozgástengely és az i-edik kartag közös normálisának metszéspontja
+5: yi = zi x xi (mert jobbsodrású rendszer)
+ [3.2 ábra]
+
+- A Denavit–Hartenberg-konvenciókat követve, a manipulátor izületeihez rögzített koordináta-rendszerek közötti kapcsolatot négy elemi transzformáció so¬rozatával biztosíthatjuk.
+- Passzív szemléletű módszer szerint minden egyes lépésben az éppen aktuális lokális koordináta-rendszer valamely tengelye mentén vagy akörül hajtunk végre transzformációt.
+
+Az egymást követő elemi transzformációk rendre a következők:
+1. Az (i-1)-edik koordináta-rendszert forgassuk el a zi-1 tengely körül az teta)i izületi szöggel. Ennek a transzformációnak az lesz az eredménye, hogy az így transzformált xi-1 tengely a rákövetkező xi tengellyel párhuzamos lesz.
+2. Az első lépésben kapott lokális koordináta-rendszer z tengelye mentén toljuk el a lokális koordináta-rendszert az izületi távolsággal. A második transzformá¬ció azt eredményezi, hogy az így kapott lokális koordináta-rendszer xi-1 tenge¬lye és az i-edik koordináta-rendszer xi tengelye egy irányba mutat.
+3. Ha a második lépésben kapott lokális koordináta-rendszert az xi-1 egység¬vektora irányában a kartag általánosított hosszával eltoljuk, akkor a transzfor¬máció eredményeként kapott lokális koordináta-rendszer origója és xi-1 tenge¬lye, valamint az i-edik koordináta-rendszer Oi origója és xi tengelye egybe fog esni.
+4. Végül forgassuk el a kapott lokális koordináta-rendszert a kartag csavarási szögével az xi-1 egységvektora körül. E transzformáció eredményeként a kapott lokális koordináta-rendszer és az i-edik koordináta-rendszer egybe fog esni.
+
+
+Írja le a pi, és pi-1 ugyanazt a P pontot az i-edik és (i-1)-edik lokális koordináta-rendszerben:
+Ekkor a két vektort a következők szerint feleltethetjük meg egymásnak:
+(3.4)
+(3.9)
+(3.10)
