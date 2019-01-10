@@ -881,3 +881,92 @@ SzA60. A CCX mag-blokk és a Zeppelin modul áttekintése
 
 (A CCX mag-blokk összevetése ARM mag cluster-ével, a Zeppelin modul
 felépítése)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==================================================================================================================
+A robotmanipulátorok modellezésének matematikai alapjai
+- megvan -
+
+Homogén transzformációk
+- ha adott egy merev test geometriai reprezentációja és ehhez hozzárendelünk egy koordinátarendszert, akkor a test bármely helyzetében kiszámolható a koordináta rendszer pozíciójának és orientációjának a változása -> ennek legtömörebb formája a homogén transzformációk alkalmazása
+- rögzítünk egy pontot a B bázis koordinátarendszerben, ennek egységvektorai pedig legyenek x, y, és z. A v helyvektor pedig leírja az L lokális koordináta rendszer OL origóját a bázis origójához képest
+[2.4 és 2.5]
+- a második derékszögű koordinátarendszer az eredeti kr.-hez viszonyított orientációját egy R mátrixszal határozzuk meg (ha lokális koordinátarendszer bázisvektorait a bázis koordináta rendszer egyes tengelyeire levetítjük)
+[2.6]
++ R ortonormált (e1, e2, e3 oszlopvektorok egységnyi hosszúak) -> inverze megegyezik a transzponáltjával
++ R orientációs mátrix
+˘[2.7]
+
+Homogén koordináta-transzformációk
+- Feladat: adott egy P pont homogén koordinátái lokális koordinátarendszerben
+- kérdés: milyen homogén koordináták határozzák meg a pontot a bázis koordinátarendszerben?
+- ezek alapján: 2.9 -> 2.10 ez pedsig összevonva tömören, P pont bázis rendszerben meghatározott homogén koordinátás leírása: 2.11
+- [2.12] -> eredmény röviden, ahol [2.13] homogén transzformációs mátrix legáltalánosabb formája: R orientációs mátrix, v oszlopvektor a lokális kr. koordináta helyzetét írja le a bázis kr.-hez képest, perspT a majdnem mindig zérüs perspektív vektor, n skálázó faktor, ami általában egység
+
+- elemi forgatások homogén transzformációs mátrixai: [2.14], eltolás mátrix: [2.5]
+
+Összetett homogén transzformációk („aktív” és „passzív” szempont)
+Az elemi forgatások és eltolások sorozatát elemi homogén transzformá¬ciós mátrixok összeszorzásával számolhatjuk ki. Mivel a mátrixszorzás nem kommutatív művelet, ezért nem mindegy, hogy az egyes forgatásokat és eltolá¬sokat milyen sorrendben hajtjuk végre.
+- Inicializáljuk a T transzformációs mátrixot az egységmátrixszal, amely azt fejezi ki, hogy kezdetben a B bázis és az L lokális ortonormált koordináta-rendszerek egybeesnek
+- Ha az L lokális koordináta-rendszert a B bázis valamely egységvektora körül vagy mentén transzformáljuk (aktív szempont vagy mozgás leírás), akkor a T homogén transzformációs mátrixot balról szorozzuk az aktuális elemi forgatási vagy eltolási homogén transzformációs mátrixszal
+- Ha az L lokális koordináta-rendszert valamely saját egységvektora körül vagy mentén transzformáljuk (passzív szempont vagy vonatkoztatási rendszer megváltoztatása), akkor a T homogén transzformációs mátrixot jobbról szorozzuk az aktuális elemi forgatási vagy eltolási homogén transz¬formációs mátrixszal
+[ha van még hely: 2.16 + 2.17]
+
+Rodrigues transzformáció
+- Ha egy B bázishoz képest az L lokális rendszert tetszőlegesen elforgatjuk, akkor ez a transzformáció leírható egy megfelelően választott u egységvektor körül (gamma) szöggel végzett forgatással. Ezt az operációt Rodrigues-transzformációnak szokás nevezni. 
+- Legyen B és L két ortonormált koordináta-rendszer és kezdetben essenek egybe. Legyen u egységvektor és tételezzük fel, hogy az L lokális koordináta-rendszert megforgatjuk az u körül egy ismert gamma szöggel. Ekkor a Rodrigues-transzformáció mátrixa, Rodr(u, gamma), amely az L koordinátáit B koordinátáiba képezi le:
+- [2.18]
+- [2.19]
+- [2.28] - [5 transzformációból áll: 2-vel eljutunk az x tengelyig, ott forgatunk, majd 2-vel visszaforgatunk.]
+- rf forgatási szöge és az u vektor: 2.30 és 2.31
+
+==================================================================================================================
+3Mit tud a grafikus robotszimulációról? Három dimenziós objektumok megjelenítése (3D -> 2D transzformációk). Hogyan írjuk le a munkadarabokat homogén koordinátákkal? Milyen transzformációkat használhatunk a munkadarabok mozgásának leírására? Külső koordináták: Henger, gömb és derékszögű koordinátarendszerek kapcsolata. 
+
+Három dimenziós objektumok megjelenítése
+- Képies, perspektivikus, az emberi látáshoz nagymértékben illeszkedő ábrázolásmód. Az ilyen ábra igen szemléletes, de torzításai jelentősek
+- A tárgy tényleges méreteiből, arányaiból lehetőleg sokat megtartó ábrázolásmódok. Ide sorolhatók a párhuzamos vetítéssel nyerhető ábrák, az axonometria.
+
+- Vetítés: Vetítésnek nevezzük azokat a dimenzióveszteséggel járó ponttranszformációkat, melyeknél bármelyik képpont és a neki megfelelő összes tárgypont egy egyenesen helyezkedik el
+- Az összetartozó tárgy- és képpontokon áthaladó egyenest vetítősugárnak nevezzük. A vetítés eredménye, a vetület, egy térbeli felületen a képfelületen - képződik. Az egyes tárgypontok képe a vetítősugarak döféspontja a képfelületen 
+
+Az a szabály, amely szerint vetítősugarainkat kiválasztjuk, alapvetően befolyásolja a kialakuló kép jellegét. Ennek megfelelően sorolhatjuk csoportokba a következő néhány vetítésfajtát: 
+[13. oldal ábra)
+
+- Középpontos vetítés (centrális projekció)
+	- a vetítősugarak mindegyike áthalad egy vetítési középponton
+	- a létrejövő kép igen közel áll az emberi szem, a fényképezőgép által alkototthoz
+	- perspektivikus ábrához jutunk -> a perspektivikus hatás elsősorban a tárgy és a centrumpont távolságától függ. Ha ez a távolság minden határon túl nő, a középpontos vetítés párhuzamos vetítésbe megy át
+
+- Párhuzamos vetítés
+	- vetítősugarak egymással párhuzamosak
+	- Ha ezen kívül a vetítősugarak még merőlegesek is a képsíkra, a merőleges - ortogonális - vetítés, egyébként a ferde (klinogonális) vetítés elnevezést használjuk
+
+- Axonometria
+	- a párhuzamos vetítés segítségével származtattuk
+	- a vetületképzés tényleges végrehajtása geometriai megfogalmazás helyett koordináta-transzformációs felfogásban célszerűbb
+
+Hogyan írjuk le a munkadarabokat homogén koordinátákkal? 
+- Az objektumok felületét síklapokkal közelítjük.
+- Az így kapott csúcsokat valamilyen sorrendben indexszel azonosítjuk, majd meghatározzuk a csúcspontok homogén koordinátás leírásait.
+- Ha a modellezés során n számú csúcsot használunk, akkor a leíró vektorokat 4xn méretű mátrixba foglalhatjuk össze. 
+[3.4]
+
+- Ha a céltárgyat egy adott pozícióból egy másik helyzetbe kell eljuttatni, akkor a manipuláció leírására homogén transzformációs mátrixot használunk [3.5]
+
+Milyen transzformációkat használhatunk a munkadarabok mozgásának leírására?
+LD előző tételek
+
+Küldő koordináták
