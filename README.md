@@ -1,16 +1,69 @@
-SzA54. A Skylake család I.
-(főbb jellemzői, a mikroarchitektúra továbbfejlesztése, a mikroarchitektúra szélességének növelése, az Intel grafikai családjai, a fejlődés áttekintése)
+1))
+Arról az alkalmazásról szeretnék egy bemutatót tartani, amely támogatja ill. megvalósítja a teszt vezetések során készített videók automatikus taggelését.
 
-- 6. generációs processzorok
-- 10%-kal jobb teljesítmény, 30%-kal jobb grafikus teljesítmény
+I would like do a short presentation about the application we have been working on. This application supports the automatic tagging of the videos the were recorded during test drives.
 
-* magok mikroarchitektúrájának a továbbfejlesztése
-- növelték a szélességeket -> 5 dekódoló egység (korábban csak 4) (egy komplex és 4 egyszerű) -> a szélesség növelésével a frontend szélessége is megnőtt: az utasítás sorban (50;2x25/thread)
-- a front end Pentium 4-ig (2000) 3 széles volt, Core 2 elején (2006) 4 széles, Skalake elején már 5 széles
-- nagyobb buffer és regiszter méret
+2))
+Kezdetben a teszt vezetések során két emberre volt szükség: egy vezetőre és egy mérnökre, aki a taggelést kézzel végzi el.
+A projekt célja az volt, hogy ezt a taggelést automatizáljuk, hogy a későbbiekben már offline, mesterséges intelligencia segítségével történhessen.
 
-* grafikus családok (ld. korábbi tétel)
-- a SkyLake nem használja az FIVR technológiát -> ennek oka, hogy növeli a lapkahőmérsékletet
+At first, two people were needed during test drives: a driver, and an engineer who did the tagging manually.
+The goal of this project was to make this process of tagging automatic, so tagging is done offline with the help of artificial intelligence.
+
+3))
+A gépi látás fejlődésének köszönhetően egyre több szabadon hozzáférhető képfelismerő alkalmazás létezik.
+A teszt vezetések során fontos az, hogy ismerjük a környezetet (hogy tudjuk azt, milyen objektumok zavarhatják a GNSS jelét). -> Ezt a feladatot pedig megoldhatjuk mesterséges intelligencia segítségével.
+Az automatikus taggeléshez a képfelismerés mellett további mérések is felhasználhatók.
+
+There are many publicly accessible applications for image recognition thanks to the rapid developmebnt of computer vision technologies.
+It’s beneficial to know our enviroment during test drive evaluation -> this task can be done using AI
+Image recognition is not the only way to gather information about the environment, there other measurements that can be used to identify certain objects of interest.
+
+4))
+Az alkalmazást python nyelven valósítottuk meg, és felhasználjuk a TensorFlow Object Detection API-ját. 
+A TensorFlow egy nyílt forráskódú programkönyvtár, amely támogatja a gépi tanulást, a neurális hálózatok használatát.
+Az objektum detektáláshoz Faster R-CNN-t használtunk, már létező módszer, ami azt határozza meg, hogy az adott képkereten hogyan kerülnek kiválasztásra a számunkra fontos régiók.
+
+The application was written in Python, we used TensorFlow’s Object Detection API
+TensorFlow is an open source machine learning framework
+For object detection we used Faster R-CNN -> which is used which combines rectangular region proposals with convolutional neural network features.
+
+5))
+Az alábbi ábra szemlélteti a szoftvernek a felépítését.
+Van egy main script, aminek a bemenete a taggelendő videó
+Ebből kinyerjük az egyes képkereteket, az Object detection API pedig keretenként szolgáltat eredményeket
+Az így kapott eredményeket a main script kigyűjti egy mátrixba (sorok = képkeret száma, oszlopok = detektálandó objektumok)
+Végül az eredményeket kiírja egy excel fájlba
+
+Here’s a quick overview of the software.
+There is main script, the input is the video file recorded by the measurement camera
+The script extracts the frames from the video, and the object detection application provides a result for every frame
+The results are stored in a matrix (rows represent the number of the frame, columns represent the detected object)
+The results are written into an excel file
+
+6))
+A neurális hálózatot a LabelImg nevű program segítségével tanítjuk be.
+Minden detektálandó objektumről szükség van néhány száz tanuló képre, ezeknek az annotációja elvégezhető egy grafikus felüleleten
+Az így keletkező szöveges fájlok és a képek segítségével pedig már betanítható a hálózat.
+
+The neural network is trained using LabelImg
+It provides a graphical interface to annotate images, each object needs a couple hundred example images
+Using the annotated images we can train the neural network
+
+7))
+Ezen a dián látható néhány példa a detektálás eredményére. Néhány száz tanuló képpel már viszonylag pontos eredményeket érhetünk el.
+
+This slide shows the results. We can achieve relatively precise results using about two hundred images per object.
+
+8))
+A kimeneti fájlt az alábbi formában állítjuk elő.
+Ezen a képen látszik, hogy éppen elhaladtunk egy gantry alatt.
+
+This slide shows the output file.
+After passing a gantry this is the result.
+
+9))
+Video
 
 ====================================================================================================================
 SzA55. A Skylake család II.
